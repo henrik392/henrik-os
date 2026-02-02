@@ -145,7 +145,7 @@ setup_homebrew() {
   local casks=(
     ghostty visual-studio-code raycast alt-tab
     slack discord figma google-chrome zen-browser
-    obsidian spotify docker claude
+    obsidian spotify orbstack claude
   )
 
   info "Installing casks..."
