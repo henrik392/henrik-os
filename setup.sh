@@ -1204,6 +1204,18 @@ setup_macos() {
 </plist>
 EOF
 
+  # Touch ID for sudo
+  local sudo_tid="/etc/pam.d/sudo_local"
+  if [[ ! -f "$sudo_tid" ]] || ! grep -q "pam_tid.so" "$sudo_tid" 2>/dev/null; then
+    info "Enabling Touch ID for sudo..."
+    sudo bash -c 'cat > /etc/pam.d/sudo_local << PAMEOF
+auth       sufficient     pam_tid.so
+PAMEOF'
+    success "Touch ID for sudo enabled"
+  else
+    success "Touch ID for sudo already enabled"
+  fi
+
   # Finder
   defaults write NSGlobalDomain AppleShowAllExtensions -bool true
   defaults write com.apple.finder AppleShowAllFiles -bool true
